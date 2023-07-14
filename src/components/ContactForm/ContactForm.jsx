@@ -7,8 +7,8 @@ import {
 } from './ContactForm.styled';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContactsItems } from '../../redux/contactsSlice';
-import { addContact } from 'redux/operations';
+import { selectContactsItems } from '../../redux/contacts/contactsSlice';
+import { addContact } from 'redux/contacts/contacts-operations';
 
 export default function ContactForm() {
   const [name, setName] = useState('');

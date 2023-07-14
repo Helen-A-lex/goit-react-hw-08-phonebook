@@ -1,7 +1,7 @@
 import { useState, useDispatch } from 'react';
 import { logIn } from 'redux/auth/auth-operations';
 
-export default function Login() {
+export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
