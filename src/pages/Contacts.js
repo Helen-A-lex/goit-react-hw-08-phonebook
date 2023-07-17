@@ -4,10 +4,13 @@ import { fetchContacts } from 'redux/contacts/contacts-operations';
 import { ContactList } from 'components/ContactList/ContactList';
 import ContactForm from 'components/ContactForm/ContactForm';
 import { Filter } from 'components/Filter/Filter';
-import { Title } from './App.styled';
+import { Title } from '../components/App/App.styled';
+import { selectIsLoading } from '../redux/contacts/contactsSlice';
+import { selectError } from '../redux/contacts/contactsSlice';
+
 export default function Contacts() {
   const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoading);
+  const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
   useEffect(() => {

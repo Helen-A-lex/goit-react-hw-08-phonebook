@@ -1,53 +1,40 @@
-import { useState, useDispatch } from 'react';
+import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/auth-operations';
+import {
+  Form,
+  Label,
+  Input,
+  ButtonAddDeleteContact,
+} from 'components/ContactForm/ContactForm.styled';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-
-  const handleChange = evt => {
-    const { name, value } = evt.target;
-
-    switch (name) {
-      case 'email':
-        setEmail(value);
-        break;
-      case 'password':
-        setPassword(value);
-      default:
-        return;
-    }
-  };
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    dispatch(logIn({ email, password }));
+    const form = evt.currentTarget;
+    console.log(form);
+    dispatch(
+      logIn({
+        email: form.elements.email.value,
+        password: form.elements.password.value,
+      })
+      
+    );
 
-    setEmail('');
-    setPassword('');
+    form.reset();
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Label htmlFor="user_email">
         Email
-        <Input
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-        />
+        <Input type="email" name="email" />
       </Label>
 
       <Label htmlFor="user_password">
         Password
-        <Input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-        />
+        <Input type="password" name="password" />
       </Label>
       <ButtonAddDeleteContact type="submit">Login</ButtonAddDeleteContact>
     </Form>
