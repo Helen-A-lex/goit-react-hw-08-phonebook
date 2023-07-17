@@ -13,13 +13,12 @@ export default function LoginForm() {
   const handleSubmit = evt => {
     evt.preventDefault();
     const form = evt.currentTarget;
-    console.log(form);
+
     dispatch(
       logIn({
         email: form.elements.email.value,
         password: form.elements.password.value,
       })
-      
     );
 
     form.reset();
