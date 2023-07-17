@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 import { lazy, useEffect } from 'react';
 import {selectIsRefreshing}from "../../redux/auth/auth-selectors"
-
+import { PrivateRoute } from '../PrivateRoute';
+import { RestrictedRoute } from '../RestrictedRoute';
 import { fetchCurrentUser } from 'redux/auth/auth-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
@@ -28,9 +29,9 @@ export default function App() {
       {isRefreshing ? <b>Refresh user</b> :  (<Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/contacts" element={<Contacts />} />
+          <Route path="/register" element={ <RestrictedRoute redirectTo="/contacts" component={<Register />} />} />
+          <Route path="/login" element={<RestrictedRoute redirectTo="/contacts" component={<Login />} />} />
+          <Route path="/contacts" element={<PrivateRoute redirectTo="/login" component={<Contacts />} />} />
         </Route>
       </Routes>)}
       
