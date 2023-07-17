@@ -27,9 +27,13 @@ const authSlice = createSlice({
         state.token = null;
         state.isLoggedIn = false;
       })
-      .addCase(fetchCurrentUser, (state, action) => {
+
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
+      })
+      .addCase(fetchCurrentUser.rejected, state => {
+        state.isRefreshing = true;
       }),
 });
 export const authReducer = authSlice.reducer;

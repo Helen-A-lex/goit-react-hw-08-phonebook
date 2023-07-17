@@ -25,7 +25,7 @@ export default function App() {
     <Layout>
       <GlobalStyle />
       
-      {!isRefreshing && (<Routes>
+      {isRefreshing ? <b>Refresh user</b> :  (<Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="/register" element={<Register />} />
