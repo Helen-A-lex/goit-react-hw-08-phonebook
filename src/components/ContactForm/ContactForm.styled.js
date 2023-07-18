@@ -1,23 +1,32 @@
 import styled from 'styled-components';
-export const Form = styled.form`
-  border: 1px solid black;
+import { Form, Field } from 'formik';
+
+export const FormWrap = styled(Form)`
+  border: 2px solid yellow;
+
+  border-radius: 40px;
+  background: linear-gradient(146deg, #6c6c66, transparent);
   width: 400px;
-  height: 300px;
+  height: 360px;
   display: flex;
   flex-direction: column;
   gap: 10px;
   padding: 20px;
   justify-content: space-between;
   margin-bottom: 20px;
+  margin-right: auto;
+  margin-left: auto;
 `;
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: 600;
   font-family: sans-serif;
+  color: rgb(217, 232, 64);
 `;
-export const Input = styled.input`
+export const Input = styled(Field)`
   width: 200px;
   border: 1px solid #dcdbdb;
   padding: 5px;
@@ -25,8 +34,8 @@ export const Input = styled.input`
   outline: transparent;
 
   &:focus {
-    border: 1px solid #987dc6;
-    box-shadow: 5px 0px 27px -8px rgba(115, 62, 146, 1);
+    border: 1px solid rgb(197 216 14);
+    box-shadow: rgb(207 226 21) 5px 0px 27px -8px;
   }
 `;
 export const ButtonAddDeleteContact = styled.button`
@@ -41,7 +50,7 @@ export const ButtonAddDeleteContact = styled.button`
 
   &:hover,
   &:focus {
-    background-color: #5858f0;
+    background-color: rgb(202 222 4);
     box-shadow: 5px 0px 27px -8px rgba(91, 95, 206, 1);
   }
 `;

@@ -7,7 +7,7 @@ import { fetchCurrentUser } from 'redux/auth/auth-operations';
 import { useDispatch, useSelector } from 'react-redux';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
 import { GlobalStyle } from '../GlobalStyle';
-import { Layout } from '../Layout';
+
 
 const Home = lazy(() => import('../../pages/Home'));
 const Contacts = lazy(() => import('../../pages/Contacts'));
@@ -23,7 +23,8 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <Layout>
+    
+    <>
       <GlobalStyle />
       
       {isRefreshing ? <b>Refresh user</b> :  (<Routes>
@@ -33,8 +34,8 @@ export default function App() {
           <Route path="/login" element={<RestrictedRoute redirectTo="/contacts" component={<Login />} />} />
           <Route path="/contacts" element={<PrivateRoute redirectTo="/login" component={<Contacts />} />} />
         </Route>
-      </Routes>)}
+      </Routes>)}</>
       
-    </Layout>
+    
   );
 }

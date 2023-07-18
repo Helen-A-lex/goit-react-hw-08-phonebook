@@ -17,7 +17,7 @@ export const ContactListItem = ({ contact }) => {
   return (
     <>
       <ListItem key={contact.id}>
-        {contact.name} : {contact.phone} 
+        {contact.name} : {contact.number} 
         <ButtonAddDeleteContact
           onClick={handleDeleteContact}
           

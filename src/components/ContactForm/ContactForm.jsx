@@ -1,39 +1,24 @@
-import { useState } from 'react';
 import {
-  Form,
+  FormWrap,
   Label,
   Input,
   ButtonAddDeleteContact,
+  
 } from './ContactForm.styled';
-
+import {  ErrorMessage, Formik } from 'formik';
+import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContactsItems } from '../../redux/contacts/contactsSlice';
 import { addContact } from 'redux/contacts/contacts-operations';
 
 export default function ContactForm() {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-
+  const initialValues = { name: '', number: '' };
   const dispatch = useDispatch();
   const contacts = useSelector(selectContactsItems);
 
-  const handleChange = evt => {
-    const { name, value } = evt.target;
+  const handleSubmit = (values, { resetForm }) => {
+    const { name, number } = values;
 
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'phone':
-        setPhone(value);
-        break;
-      default:
-        return;
-    }
-  };
-
-  const handleSubmit = evt => {
-    evt.preventDefault();
     const isDuplicateName = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
@@ -43,40 +28,36 @@ export default function ContactForm() {
       return;
     }
 
-    dispatch(addContact({ name, phone }));
+    dispatch(addContact({ name, number }));
 
-    setName('');
-    setPhone('');
+    resetForm();
   };
-
+  const schema = Yup.object().shape({
+    name: Yup.string().required().min(4),
+    number: Yup.number().min(4).required(),
+  });
   return (
-    <Form onSubmit={handleSubmit}>
-      <Label htmlFor="user_name">
-        Name
-        <Input
-          type="text"
-          name="name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-          value={name}
-          onChange={handleChange}
-        />
-      </Label>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={schema}
+      onSubmit={handleSubmit}
+    >
+      <FormWrap>
+        <Label htmlFor="user_name">
+          Name
+          <Input type="text" name="name" />
+          <ErrorMessage name="name" />
+        </Label>
 
-      <Label htmlFor="user_tel">
-        Number
-        <Input
-          type="tel"
-          name="phone"
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-          value={phone}
-          onChange={handleChange}
-        />
-      </Label>
-      <ButtonAddDeleteContact type="submit">Add contact</ButtonAddDeleteContact>
-    </Form>
+        <Label htmlFor="user_tel">
+          Number
+          <Input type="tel" name="number" />
+          <ErrorMessage name="number" />
+        </Label>
+        <ButtonAddDeleteContact type="submit">
+          Add contact
+        </ButtonAddDeleteContact>
+      </FormWrap>
+    </Formik>
   );
 }

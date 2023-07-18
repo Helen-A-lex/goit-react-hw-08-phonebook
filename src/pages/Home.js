@@ -1,10 +1,5 @@
-import { MdContactPhone } from 'react-icons/md';
+import HelloDiv from 'components/HelloDiv/HelloDiv';
+
 export default function Home() {
-  return (
-    <div>
-      <h1>
-        Personal contacts book <MdContactPhone width="32" />
-      </h1>
-    </div>
-  );
+  return <HelloDiv />;
 }
