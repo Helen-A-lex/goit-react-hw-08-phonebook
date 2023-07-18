@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { selectUserName } from "../../redux/auth/auth-selectors";
 import { logOut } from "../../redux/auth/auth-operations";
 import defaultAvatar from "./default-user-img.png";
+import { UserMenuWrap, WelcomeText } from "./UserMenu.styled";
+import { ButtonAddDeleteContact } from "components/ContactForm/ContactForm.styled";
 
 export default function UserMenu() {
     const dispatch = useDispatch();
@@ -10,10 +12,10 @@ export default function UserMenu() {
 
     const handleLogOut = () => dispatch(logOut());
     return (
-        <div>
+        <UserMenuWrap>
            <img src={avatar} width="30" alt={name} />
-            <p>Welcome, {name}</p>
-            <button type="button" onClick ={handleLogOut}>Log Out</button>
-        </div>
+            <WelcomeText>Welcome, {name}</WelcomeText>
+            <ButtonAddDeleteContact type="button" onClick ={handleLogOut}>Log Out</ButtonAddDeleteContact>
+        </UserMenuWrap>
     )
 }

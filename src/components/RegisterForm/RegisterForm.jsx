@@ -6,7 +6,7 @@ import {
   Input,
   ButtonAddDeleteContact,
 } from 'components/ContactForm/ContactForm.styled';
-import { ErrorMessage, Formik } from 'formik';
+import { ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
 
 export default function RegisterForm() {
@@ -35,33 +35,37 @@ export default function RegisterForm() {
     email: Yup.string().min(4).required(),
     password: Yup.string().min(5).max(16).required(),
   });
-
+const formik = useFormik({
+    initialValues,
+    onSubmit: handleSubmit,
+    validationSchema: schema,
+  });
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={schema}
-      onSubmit={handleSubmit}
-    >
-      <FormWrap>
+    // <Formik
+    //   initialValues={initialValues}
+    //   validationSchema={schema}
+    //   onSubmit={handleSubmit}
+    // >
+      <FormWrap onSubmit ={formik.handleSubmit}>
         <Label htmlFor="user_name">
           Username
-          <Input type="text" name="name" />
+          <Input type="text" name="name" {...formik.getFieldProps('name')}/>
           <ErrorMessage name="name" />
         </Label>
 
         <Label htmlFor="user_email">
           Email
-          <Input type="email" name="email" />
+          <Input type="email" name="email" {...formik.getFieldProps('email')}/>
           <ErrorMessage name="email" />
         </Label>
 
         <Label htmlFor="user_password">
           Password
-          <Input type="password" name="password" />
+          <Input type="password" name="password" {...formik.getFieldProps('password')}/>
           <ErrorMessage name="password" />
         </Label>
         <ButtonAddDeleteContact type="submit">Register</ButtonAddDeleteContact>
       </FormWrap>
-    </Formik>
+    // </Formik>
   );
 }
