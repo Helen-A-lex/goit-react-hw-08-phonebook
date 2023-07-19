@@ -4,7 +4,7 @@ import {
   Input,
   ButtonAddDeleteContact,
 } from './ContactForm.styled';
-import { ErrorMessage, useFormik } from 'formik';
+import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContactsItems } from '../../redux/contacts/contactsSlice';
@@ -36,32 +36,34 @@ export default function ContactForm() {
     number: Yup.number().min(4).required(),
   });
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit: handleSubmit,
-    validationSchema: schema,
-  });
+  // const formik = useFormik({
+  //   initialValues,
+  //   onSubmit: handleSubmit,
+  //   validationSchema: schema,
+  // });
 
   return (
-    // <Formik
-    //   initialValues={initialValues}
-    //   validationSchema={schema}
-    //   onSubmit={handleSubmit}
-    // >
-    <FormWrap onSubmit={formik.handleSubmit}>
-      <Label htmlFor="user_name">
-        Name
-        <Input type="text" name="name" {...formik.getFieldProps('name')} />
-        <ErrorMessage name="name" />
-      </Label>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={schema}
+      onSubmit={handleSubmit}
+    >
+      <FormWrap>
+        <Label htmlFor="user_name">
+          Name
+          <Input type="text" name="name" />
+          <ErrorMessage name="name" />
+        </Label>
 
-      <Label htmlFor="user_tel">
-        Number
-        <Input type="tel" name="number" {...formik.getFieldProps('number')} />
-        <ErrorMessage name="number" />
-      </Label>
-      <ButtonAddDeleteContact type="submit">Add contact</ButtonAddDeleteContact>
-    </FormWrap>
-    // </Formik>
+        <Label htmlFor="user_tel">
+          Number
+          <Input type="tel" name="number" />
+          <ErrorMessage name="number" />
+        </Label>
+        <ButtonAddDeleteContact type="submit">
+          Add contact
+        </ButtonAddDeleteContact>
+      </FormWrap>
+    </Formik>
   );
 }
