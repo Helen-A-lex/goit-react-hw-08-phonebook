@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { logIn } from 'redux/auth/auth-operations';
 import {
-  FormWrap,
-  Label,
-  Input,
-  ButtonAddDeleteContact,
-} from 'components/ContactForm/ContactForm.styled';
+  FormLogin,
+  LabelLogin,
+  InputLogin,
+  ButtonLogin,
+} from '../../components/LoginForm/LoginFormstyled';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -31,20 +31,20 @@ export default function LoginForm() {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <FormWrap>
-        <Label htmlFor="user_email">
+      <FormLogin>
+        <LabelLogin htmlFor="user_email">
           Email
-          <Input type="email" name="email" />
+          <InputLogin type="email" name="email" />
           <ErrorMessage name="email" />
-        </Label>
+        </LabelLogin>
 
-        <Label htmlFor="user_password">
+        <LabelLogin htmlFor="user_password">
           Password
-          <Input type="password" name="password" />
+          <InputLogin type="password" name="password" />
           <ErrorMessage name="password" />
-        </Label>
-        <ButtonAddDeleteContact type="submit">Login</ButtonAddDeleteContact>
-      </FormWrap>
+        </LabelLogin>
+        <ButtonLogin type="submit">Login</ButtonLogin>
+      </FormLogin>
     </Formik>
   );
 }

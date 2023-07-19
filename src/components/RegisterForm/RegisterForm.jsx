@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/auth/auth-operations';
 import {
-  FormWrap,
-  Label,
-  Input,
-  ButtonAddDeleteContact,
-} from 'components/ContactForm/ContactForm.styled';
+  FormRegister,
+  LabelRegister,
+  InputRegister,
+  ButtonRegister,
+} from '../../components/RegisterForm/RegisterForm.styled';
 import { ErrorMessage, Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -41,26 +41,26 @@ export default function RegisterForm() {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <FormWrap>
-        <Label htmlFor="user_name">
+      <FormRegister>
+        <LabelRegister htmlFor="user_name">
           Username
-          <Input type="text" name="name" />
+          <InputRegister type="text" name="name" />
           <ErrorMessage name="name" />
-        </Label>
+        </LabelRegister>
 
-        <Label htmlFor="user_email">
+        <LabelRegister htmlFor="user_email">
           Email
-          <Input type="email" name="email" />
+          <InputRegister type="email" name="email" />
           <ErrorMessage name="email" />
-        </Label>
+        </LabelRegister>
 
-        <Label htmlFor="user_password">
+        <LabelRegister htmlFor="user_password">
           Password
-          <Input type="password" name="password" />
+          <InputRegister type="password" name="password" />
           <ErrorMessage name="password" />
-        </Label>
-        <ButtonAddDeleteContact type="submit">Register</ButtonAddDeleteContact>
-      </FormWrap>
+        </LabelRegister>
+        <ButtonRegister type="submit">Register</ButtonRegister>
+      </FormRegister>
     </Formik>
   );
 }
