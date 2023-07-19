@@ -7,6 +7,7 @@ import { Filter } from 'components/Filter/Filter';
 import { Title } from '../components/App/App.styled';
 import { selectIsLoading } from '../redux/contacts/contactsSlice';
 import { selectError } from '../redux/contacts/contactsSlice';
+import { Loader } from 'components/Loader/Loader';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -20,9 +21,11 @@ export default function Contacts() {
   return (
     <>
       {isLoading && !error && <b>Request in progress...</b>}
-      <ContactList />
+
       <Title>Add new contact</Title>
       <ContactForm />
+      {isLoading && <Loader />}
+      <ContactList />
       <Title>Find the desired contact</Title>
       <Filter />
     </>

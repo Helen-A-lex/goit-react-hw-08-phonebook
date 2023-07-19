@@ -3,11 +3,10 @@ import { Form, Field } from 'formik';
 
 export const FormWrap = styled(Form)`
   border: 2px solid yellow;
-
   border-radius: 40px;
   background: linear-gradient(146deg, #6c6c66, transparent);
   width: 400px;
-  height: 360px;
+  height: 300px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -20,14 +19,14 @@ export const FormWrap = styled(Form)`
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  font-size: 15px;
+  gap: 10px;
+  font-size: 20px;
   font-weight: 600;
   font-family: sans-serif;
   color: rgb(217, 232, 64);
 `;
 export const Input = styled(Field)`
-  width: 200px;
+  width: 250px;
   border: 1px solid #dcdbdb;
   padding: 5px;
   font-size: 15px;
@@ -40,10 +39,11 @@ export const Input = styled(Field)`
 `;
 export const ButtonAddDeleteContact = styled.button`
   width: 100px;
+  height: 35px;
   padding: 5px;
   background-color: white;
   border: 1px solid #dedede;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;

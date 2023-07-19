@@ -6,12 +6,21 @@ import {
   InputRegister,
   ButtonRegister,
 } from '../../components/RegisterForm/RegisterForm.styled';
-import { ErrorMessage, Formik } from 'formik';
+
+import {  Formik } from 'formik';
 import * as Yup from 'yup';
+import FormError from 'components/FormError/FormError';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const initialValues = { name: '', email: '', password: '' };
+
+const schema = Yup.object().shape({
+  name: Yup.string().min(4).required(),
+  email: Yup.string().min(4).required(),
+  password: Yup.string().min(5).max(16).required(),
+});
 export default function RegisterForm() {
-  const initialValues = { name: '', email: '', password: '' };
-
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
@@ -24,16 +33,10 @@ export default function RegisterForm() {
         email,
         password,
       })
-    );
+    ).unwrap().then(()=>toast.success("Registration succesfully")).catch(()=> toast.error("Something went wrong. Try again"));
 
     resetForm();
   };
-
-  const schema = Yup.object().shape({
-    name: Yup.string().required().min(4),
-    email: Yup.string().min(4).required(),
-    password: Yup.string().min(5).max(16).required(),
-  });
 
   return (
     <Formik
@@ -42,22 +45,22 @@ export default function RegisterForm() {
       onSubmit={handleSubmit}
     >
       <FormRegister>
-        <LabelRegister htmlFor="user_name">
+        <LabelRegister htmlFor="name">
           Username
           <InputRegister type="text" name="name" />
-          <ErrorMessage name="name" />
+          <FormError name="name"/>
         </LabelRegister>
 
-        <LabelRegister htmlFor="user_email">
+        <LabelRegister htmlFor="email">
           Email
           <InputRegister type="email" name="email" />
-          <ErrorMessage name="email" />
+          <FormError name="email"/>
         </LabelRegister>
 
-        <LabelRegister htmlFor="user_password">
+        <LabelRegister htmlFor="password">
           Password
           <InputRegister type="password" name="password" />
-          <ErrorMessage name="password" />
+          <FormError name="password"/>
         </LabelRegister>
         <ButtonRegister type="submit">Register</ButtonRegister>
       </FormRegister>

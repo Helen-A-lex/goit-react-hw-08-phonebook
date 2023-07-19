@@ -4,14 +4,23 @@ import {
   Input,
   ButtonAddDeleteContact,
 } from './ContactForm.styled';
-import { ErrorMessage, Formik } from 'formik';
+import FormError from 'components/FormError/FormError';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContactsItems } from '../../redux/contacts/contactsSlice';
 import { addContact } from 'redux/contacts/contacts-operations';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const initialValues = { name: '', number: '' };
+
+const schema = Yup.object().shape({
+  name: Yup.string().min(3).required(),
+  number: Yup.number().min(4).required(),
+});
 
 export default function ContactForm() {
-  const initialValues = { name: '', number: '' };
   const dispatch = useDispatch();
   const contacts = useSelector(selectContactsItems);
 
@@ -22,7 +31,7 @@ export default function ContactForm() {
     );
 
     if (isDuplicateName) {
-      alert(`${name} is already in contacts`);
+      toast.info(`${name} is already in contacts`);
       return;
     }
 
@@ -31,17 +40,6 @@ export default function ContactForm() {
     resetForm();
   };
 
-  const schema = Yup.object().shape({
-    name: Yup.string().required().min(4),
-    number: Yup.number().min(4).required(),
-  });
-
-  // const formik = useFormik({
-  //   initialValues,
-  //   onSubmit: handleSubmit,
-  //   validationSchema: schema,
-  // });
-
   return (
     <Formik
       initialValues={initialValues}
@@ -49,16 +47,16 @@ export default function ContactForm() {
       onSubmit={handleSubmit}
     >
       <FormWrap>
-        <Label htmlFor="user_name">
+        <Label htmlFor="name">
           Name
           <Input type="text" name="name" />
-          <ErrorMessage name="name" />
+          <FormError name="name" />
         </Label>
 
-        <Label htmlFor="user_tel">
+        <Label htmlFor="tel">
           Number
           <Input type="tel" name="number" />
-          <ErrorMessage name="number" />
+          <FormError name="number" />
         </Label>
         <ButtonAddDeleteContact type="submit">
           Add contact

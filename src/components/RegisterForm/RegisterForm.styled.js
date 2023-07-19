@@ -18,14 +18,14 @@ export const FormRegister = styled(Form)`
 export const LabelRegister = styled.label`
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  font-size: 15px;
+  gap: 5px;
+  font-size: 20px;
   font-weight: 600;
   font-family: sans-serif;
   color: rgb(217, 232, 64);
 `;
 export const InputRegister = styled(Field)`
-  width: 200px;
+  width: 250px;
   border: 1px solid #dcdbdb;
   padding: 5px;
   font-size: 15px;
@@ -38,6 +38,7 @@ export const InputRegister = styled(Field)`
 `;
 export const ButtonRegister = styled.button`
   width: 100px;
+  height: 35px;
   padding: 5px;
   background-color: white;
   border: 1px solid #dedede;
